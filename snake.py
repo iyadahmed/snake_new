@@ -12,11 +12,11 @@ WINDOW_HEIGHT = NUM_Y_BLOCKS * BLOCK_SIZE
 
 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
-snake_x = (NUM_X_BLOCKS // 2) * BLOCK_SIZE
-snake_y = (NUM_Y_BLOCKS // 2) * BLOCK_SIZE
+snake_head_x = (NUM_X_BLOCKS // 2) * BLOCK_SIZE
+snake_head_y = (NUM_Y_BLOCKS // 2) * BLOCK_SIZE
 snake_direction = "up"
-snake_history = []
-snake_length = 1
+snake_body = [] # List of snake block locations
+snake_length = 10
 
 food_x = random.randint(0, NUM_X_BLOCKS - 1) * BLOCK_SIZE
 food_y = random.randint(0, NUM_Y_BLOCKS - 1) * BLOCK_SIZE
@@ -46,19 +46,19 @@ while is_game_running:
 
     # Move snake
     if snake_direction == "up":
-        snake_y -= BLOCK_SIZE
+        snake_head_y -= BLOCK_SIZE
     elif snake_direction == "right":
-        snake_x += BLOCK_SIZE
+        snake_head_x += BLOCK_SIZE
     elif snake_direction == "left":
-        snake_x -= BLOCK_SIZE
+        snake_head_x -= BLOCK_SIZE
     elif snake_direction == "down":
-        snake_y += BLOCK_SIZE
+        snake_head_y += BLOCK_SIZE
     
     # Add new snake block
-    snake_history.append((snake_x, snake_y))
+    snake_body.append((snake_head_x, snake_head_y))
     # If greater than snake length, delete oldest snake block
-    if len(snake_history) > snake_length:
-        snake_history.pop(0)
+    if len(snake_body) > snake_length:
+        snake_body.pop(0)
 
     # Draw background
     window.fill((0, 0, 0))
@@ -67,8 +67,8 @@ while is_game_running:
     pygame.draw.rect(window, (255, 0, 0), (food_x, food_y, BLOCK_SIZE, BLOCK_SIZE))
 
     # Draw snake
-    for snake_x, snake_y in snake_history:
-        pygame.draw.rect(window, (255, 255, 0), (snake_x, snake_y, BLOCK_SIZE, BLOCK_SIZE))
+    for snake_block_x, snake_block_y in snake_body:
+        pygame.draw.rect(window, (255, 255, 0), (snake_block_x, snake_block_y, BLOCK_SIZE, BLOCK_SIZE))
 
     # Switch visible and invisible buffers
     pygame.display.flip()
