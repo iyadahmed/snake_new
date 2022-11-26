@@ -18,6 +18,7 @@ WINDOW_HEIGHT = NUM_Y_BLOCKS * BLOCK_SIZE
 
 # Create window
 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+pygame.display.set_caption("Snake")
 
 # Set snake location to center of window (we divide number of window blocks by two)
 snake_head_x = (NUM_X_BLOCKS // 2) * BLOCK_SIZE
