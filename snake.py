@@ -56,6 +56,17 @@ while is_game_running:
         snake_head_x -= BLOCK_SIZE
     elif snake_direction == "down":
         snake_head_y += BLOCK_SIZE
+
+    # Make snake appear from opposite side of screen if it goes out of screen's boundary
+    if snake_head_x < 0:
+        snake_head_x = WINDOW_WIDTH - BLOCK_SIZE
+    elif snake_head_x >= WINDOW_WIDTH:
+        snake_head_x = 0
+
+    if snake_head_y < 0:
+        snake_head_y = WINDOW_HEIGHT - BLOCK_SIZE
+    elif snake_head_y >= WINDOW_HEIGHT:
+        snake_head_y = 0
     
     # If snake head location is the same as food, then create new food
     # in a different location and grow snake
