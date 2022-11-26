@@ -13,7 +13,7 @@ WINDOW_HEIGHT = NUM_Y_BLOCKS * BLOCK_SIZE
 # Create window
 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
-# Set snake location to center of screen (we divide number of blocks by two)
+# Set snake location to center of window (we divide number of window blocks by two)
 snake_head_x = (NUM_X_BLOCKS // 2) * BLOCK_SIZE
 snake_head_y = (NUM_Y_BLOCKS // 2) * BLOCK_SIZE
 snake_direction = "up"
@@ -57,7 +57,7 @@ while is_game_running:
     elif snake_direction == "down":
         snake_head_y += BLOCK_SIZE
 
-    # Make snake appear from opposite side of screen if it goes out of screen's boundary
+    # Make snake appear from opposite side of window if it goes out of window's boundary
     if snake_head_x < 0:
         snake_head_x = WINDOW_WIDTH - BLOCK_SIZE
     elif snake_head_x >= WINDOW_WIDTH:
@@ -74,6 +74,15 @@ while is_game_running:
         food_x = random.randint(0, NUM_X_BLOCKS - 1) * BLOCK_SIZE
         food_y = random.randint(0, NUM_Y_BLOCKS - 1) * BLOCK_SIZE
         snake_length += 1 # grow snake
+
+    # Check if snake hits itself
+    for snake_block_x, snake_block_y in snake_body:
+        if snake_head_x == snake_block_x and snake_head_y == snake_block_y:
+            # Game over, reset game
+            snake_body.clear()
+            snake_length = 1
+            snake_head_x = (NUM_X_BLOCKS // 2) * BLOCK_SIZE
+            snake_head_y = (NUM_Y_BLOCKS // 2) * BLOCK_SIZE
     
     # Store snake's head location in snake body list; so it can be drawn later;
     # drawing the last N snake head locations creates the illusion
