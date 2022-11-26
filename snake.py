@@ -1,14 +1,23 @@
 import pygame
 import time
+import random
 
 pygame.init()
 
-window = pygame.display.set_mode((800, 800))
+BLOCK_SIZE = 20
+NUM_X_BLOCKS = 20
+NUM_Y_BLOCKS = 20
+WINDOW_WIDTH = NUM_X_BLOCKS * BLOCK_SIZE
+WINDOW_HEIGHT = NUM_Y_BLOCKS * BLOCK_SIZE
 
-snake_x = 400
-snake_y = 400
+window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+
+snake_x = (NUM_X_BLOCKS // 2) * BLOCK_SIZE
+snake_y = (NUM_Y_BLOCKS // 2) * BLOCK_SIZE
 snake_direction = "up"
-SNAKE_SIZE = 20
+
+food_x = random.randint(0, NUM_X_BLOCKS - 1) * BLOCK_SIZE
+food_y = random.randint(0, NUM_Y_BLOCKS - 1) * BLOCK_SIZE
 
 is_game_running = True
 
@@ -35,19 +44,22 @@ while is_game_running:
 
     # Move snake
     if snake_direction == "up":
-        snake_y -= SNAKE_SIZE
+        snake_y -= BLOCK_SIZE
     elif snake_direction == "right":
-        snake_x += SNAKE_SIZE
+        snake_x += BLOCK_SIZE
     elif snake_direction == "left":
-        snake_x -= SNAKE_SIZE
+        snake_x -= BLOCK_SIZE
     elif snake_direction == "down":
-        snake_y += SNAKE_SIZE
+        snake_y += BLOCK_SIZE
 
     # Draw background
     window.fill((0, 0, 0))
 
+    # Draw food
+    pygame.draw.rect(window, (255, 0, 0), (food_x, food_y, BLOCK_SIZE, BLOCK_SIZE))
+
     # Draw snake
-    pygame.draw.rect(window, (255, 255, 0), (snake_x, snake_y, SNAKE_SIZE, SNAKE_SIZE))
+    pygame.draw.rect(window, (255, 255, 0), (snake_x, snake_y, BLOCK_SIZE, BLOCK_SIZE))
 
     # Switch visible and invisible buffers
     pygame.display.flip()
