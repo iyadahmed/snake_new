@@ -111,16 +111,16 @@ while is_game_running:
     # Draw background
     window.fill(BLACK)
 
-    # Draw score
-    text = font.render(f"Score: {snake_length - 1}", True, WHITE)
-    window.blit(text, (0, 0))
-
     # Draw food
     pygame.draw.rect(window, RED, (food_x, food_y, BLOCK_SIZE, BLOCK_SIZE))
 
     # Draw snake
     for snake_block_x, snake_block_y in snake_body:
         pygame.draw.rect(window, YELLOW, (snake_block_x, snake_block_y, BLOCK_SIZE, BLOCK_SIZE))
+
+    # Draw score
+    text = font.render(f"Score: {snake_length - 1}", True, WHITE)
+    window.blit(text, (0, 0))
 
     # Switch visible and invisible buffers
     pygame.display.flip()
