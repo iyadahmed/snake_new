@@ -4,6 +4,11 @@ import random
 
 pygame.init()
 
+# Colors
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+YELLOW = (255, 255, 0)
+
 BLOCK_SIZE = 20 # Size of snake or food (also size of game grid square)
 NUM_X_BLOCKS = 20 # Window width is a whole (integer) multiple of block size
 NUM_Y_BLOCKS = 20 # same for window height
@@ -99,14 +104,14 @@ while is_game_running:
         snake_body.pop(0)
 
     # Draw background
-    window.fill((0, 0, 0))
+    window.fill(BLACK)
 
     # Draw food
-    pygame.draw.rect(window, (255, 0, 0), (food_x, food_y, BLOCK_SIZE, BLOCK_SIZE))
+    pygame.draw.rect(window, RED, (food_x, food_y, BLOCK_SIZE, BLOCK_SIZE))
 
     # Draw snake
     for snake_block_x, snake_block_y in snake_body:
-        pygame.draw.rect(window, (255, 255, 0), (snake_block_x, snake_block_y, BLOCK_SIZE, BLOCK_SIZE))
+        pygame.draw.rect(window, YELLOW, (snake_block_x, snake_block_y, BLOCK_SIZE, BLOCK_SIZE))
 
     # Switch visible and invisible buffers
     pygame.display.flip()
