@@ -8,6 +8,7 @@ pygame.init()
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
+WHITE = (255, 255, 255)
 
 BLOCK_SIZE = 20 # Size of snake or food (also size of game grid square)
 NUM_X_BLOCKS = 20 # Window width is a whole (integer) multiple of block size
@@ -28,6 +29,9 @@ snake_length = 1
 # Create food in a random location inside game window
 food_x = random.randint(0, NUM_X_BLOCKS - 1) * BLOCK_SIZE
 food_y = random.randint(0, NUM_Y_BLOCKS - 1) * BLOCK_SIZE
+
+# Create font for drawing text
+font = pygame.font.Font('freesansbold.ttf', 32)
 
 is_game_running = True
 
@@ -105,6 +109,10 @@ while is_game_running:
 
     # Draw background
     window.fill(BLACK)
+
+    # Draw score
+    text = font.render(f"Score: {snake_length - 1}", True, WHITE)
+    window.blit(text, (0, 0))
 
     # Draw food
     pygame.draw.rect(window, RED, (food_x, food_y, BLOCK_SIZE, BLOCK_SIZE))
