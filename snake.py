@@ -54,6 +54,10 @@ while is_game_running:
     elif snake_direction == "down":
         snake_head_y += BLOCK_SIZE
     
+    if snake_head_x == food_x and snake_head_y == food_y:
+        food_x = random.randint(0, NUM_X_BLOCKS - 1) * BLOCK_SIZE
+        food_y = random.randint(0, NUM_Y_BLOCKS - 1) * BLOCK_SIZE
+    
     # Add new snake block
     snake_body.append((snake_head_x, snake_head_y))
     # If greater than snake length, delete oldest snake block
