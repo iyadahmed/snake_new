@@ -47,8 +47,8 @@ while is_game_running:
             # only allow movement to any direction if snake length is one (the game just started)
             # or if current direction is not opposite to target direction
             # for example:
-            # if snake is long and current direction is up
-            # the player cannot move down directly
+            #   if snake is long and current direction is up
+            #   the player cannot move down directly
             if event.key == pygame.K_UP and (snake_length == 1 or snake_direction != "down"):
                 snake_direction = "up"
             elif event.key == pygame.K_DOWN and (snake_length == 1 or snake_direction != "up"):
