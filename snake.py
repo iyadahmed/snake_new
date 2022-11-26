@@ -34,13 +34,18 @@ while is_game_running:
             is_game_running = False
         elif event.type == pygame.KEYDOWN:
             # Change snake direction based on arrow keys
-            if event.key == pygame.K_UP:
+            # only allow movement to any direction if snake length is one (the game just started)
+            # or if current direction is not opposite to target direction
+            # for example:
+            # if snake is long and current direction is up
+            # the player cannot move down directly
+            if event.key == pygame.K_UP and (snake_length == 1 or snake_direction != "down"):
                 snake_direction = "up"
-            elif event.key == pygame.K_DOWN:
+            elif event.key == pygame.K_DOWN and (snake_length == 1 or snake_direction != "up"):
                 snake_direction = "down"
-            elif event.key == pygame.K_RIGHT:
+            elif event.key == pygame.K_RIGHT and (snake_length == 1 or snake_direction != "left"):
                 snake_direction = "right"
-            elif event.key == pygame.K_LEFT:
+            elif event.key == pygame.K_LEFT and (snake_length == 1 or snake_direction != "right"):
                 snake_direction = "left"
             elif event.key == pygame.K_ESCAPE:
                 # Quit game if escape key is pressed
