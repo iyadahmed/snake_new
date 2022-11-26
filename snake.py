@@ -58,11 +58,11 @@ while is_game_running:
         snake_head_y += BLOCK_SIZE
     
     # If snake head location is the same as food, then create new food
-    # in a different location
+    # in a different location and grow snake
     if snake_head_x == food_x and snake_head_y == food_y:
         food_x = random.randint(0, NUM_X_BLOCKS - 1) * BLOCK_SIZE
         food_y = random.randint(0, NUM_Y_BLOCKS - 1) * BLOCK_SIZE
-        snake_length += 1
+        snake_length += 1 # grow snake
     
     # Store snake's head location in snake body list; so it can be drawn later;
     # drawing the last N snake head locations creates the illusion
