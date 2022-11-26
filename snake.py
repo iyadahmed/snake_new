@@ -77,6 +77,8 @@ while is_game_running:
     # Switch visible and invisible buffers
     pygame.display.flip()
 
+    # Delay game so that snake is not so fast
+    # we didn't need this on old computers ;)
     time.sleep(1/5)
 
 
