@@ -15,6 +15,8 @@ window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 snake_x = (NUM_X_BLOCKS // 2) * BLOCK_SIZE
 snake_y = (NUM_Y_BLOCKS // 2) * BLOCK_SIZE
 snake_direction = "up"
+snake_history = []
+snake_length = 1
 
 food_x = random.randint(0, NUM_X_BLOCKS - 1) * BLOCK_SIZE
 food_y = random.randint(0, NUM_Y_BLOCKS - 1) * BLOCK_SIZE
@@ -51,6 +53,12 @@ while is_game_running:
         snake_x -= BLOCK_SIZE
     elif snake_direction == "down":
         snake_y += BLOCK_SIZE
+    
+    # Add new snake block
+    snake_history.append((snake_x, snake_y))
+    # If greater than snake length, delete oldest snake block
+    if len(snake_history) > snake_length:
+        snake_history.pop(0)
 
     # Draw background
     window.fill((0, 0, 0))
@@ -59,7 +67,8 @@ while is_game_running:
     pygame.draw.rect(window, (255, 0, 0), (food_x, food_y, BLOCK_SIZE, BLOCK_SIZE))
 
     # Draw snake
-    pygame.draw.rect(window, (255, 255, 0), (snake_x, snake_y, BLOCK_SIZE, BLOCK_SIZE))
+    for snake_x, snake_y in snake_history:
+        pygame.draw.rect(window, (255, 255, 0), (snake_x, snake_y, BLOCK_SIZE, BLOCK_SIZE))
 
     # Switch visible and invisible buffers
     pygame.display.flip()
